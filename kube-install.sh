@@ -19,9 +19,12 @@ source <(kubectl completion bash)
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 sudo apt autoremove
 
-# Kubernetes Install
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+# Kubectl Install
+sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 
 # Minikube
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -30,5 +33,4 @@ sudo mv ./minikube /usr/local/bin/
 
 minikube start --driver=docker
 
-echo "To Access kubernets dashboard please type 'minikube dashboard', 
-if you want the proccess to run in the background just add '&' at the end"
+echo -e "\nTo Access kubernets dashboard please type 'minikube dashboard', \nif you want the proccess to run in the background just add '&' at the end"
