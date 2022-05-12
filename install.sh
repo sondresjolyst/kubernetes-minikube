@@ -34,8 +34,8 @@ while true; do
     esac
 done
 
-installScript "./scripts/docker.sh"
-installScript "./scripts/kubectl.sh"
-installScript "./scripts/minikube.sh"
+for FILE in ./scripts/*.sh; do 
+    installScript "$FILE"; 
+done
 
 echo -e "\nInstallation Complete!"
